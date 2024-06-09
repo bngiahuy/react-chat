@@ -1,0 +1,50 @@
+.bottom {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    
+    justify-content: space-between;
+
+    .icons {
+        display: flex;
+        gap: 10px;
+        img {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            
+        }
+    }
+
+    .message {
+        background-color: rgba(17, 25, 40, 0.5);
+        border: none;
+        outline: none;
+        color: white;
+        padding: 10px;
+        flex: 1;
+        border-radius: 10px;
+    }
+
+    .emoji {
+        display: flex;
+        img {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+    }
+
+    .sendBtn {
+        background-color: rgba(17, 25, 40, 0.5);
+        border: none;
+        outline: none;
+        color: white;
+        padding: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        
+    }
+}
