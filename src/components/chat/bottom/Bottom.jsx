@@ -1,39 +1,48 @@
 import { useState } from 'react';
-import './bottom.css'
+import './bottom.css';
 import EmojiPicker from 'emoji-picker-react';
 
 const Bottom = () => {
-    const [onEmojiClick, setOnEmojiClick] = useState(false);
-    const [text, setText] = useState('');
+	const [onEmojiClick, setOnEmojiClick] = useState(false);
+	const [text, setText] = useState('');
 
+	const handleEmojiClick = (event) => {
+		console.log(event);
+		setText((prev) => prev + event.emoji);
+	};
 
-    const handleEmojiClick = (event) => {
-        console.log(event);
-        setText(prev => prev + event.emoji);
-    }
+	// console.log(text) // Debugging
+	return (
+		<div className="bottom">
+			<div className="icons">
+				<img src="./img.png" alt="" />
+				<img src="./mic.png" alt="" />
+				<img src="./camera.png" alt="" />
+			</div>
 
-    // console.log(text) // Debugging   
-    return (
-        <div className="bottom">
-            <div className="icons">
-                <img src="./img.png" alt="" />
-                <img src="./mic.png" alt="" />
-                <img src="./camera.png" alt="" />
+			<input
+				type="text"
+				placeholder="Message..."
+				className="message"
+				value={text}
+				onChange={(e) => setText(e.target.value)}
+				onClick={() => (onEmojiClick ? setOnEmojiClick(false) : null)}
+			/>
+			<div className="emoji">
+				<img
+					src="./emoji.png"
+					alt="emoji-icon"
+					onClick={() => setOnEmojiClick(!onEmojiClick)}
+				/>
 
-            </div>
-            
-            <input type="text" placeholder="Message..." className='message' value={text} onChange={e=>setText(e.target.value)}/>
-            <div className="emoji">
-                <img src="./emoji.png" alt="emoji-icon" onClick={()=>setOnEmojiClick(!onEmojiClick)}/>
-                
-                <div className="emojiPicker">
-                    <EmojiPicker open={onEmojiClick} onEmojiClick={handleEmojiClick}/>
-                </div>
-            </div>
-            
-            <button className='sendBtn'>Send</button>
-        </div>
-    );
-}
+				<div className="emojiPicker">
+					<EmojiPicker open={onEmojiClick} onEmojiClick={handleEmojiClick} />
+				</div>
+			</div>
+
+			<button className="sendBtn">Send</button>
+		</div>
+	);
+};
 
 export default Bottom;
