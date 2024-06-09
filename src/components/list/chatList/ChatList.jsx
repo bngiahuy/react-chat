@@ -1,8 +1,23 @@
 import './chatList.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AddUser from './addUser/addUser';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { db } from '../../../libs/firebase';
+import useUserStore from '../../../libs/zustand';
+import { set } from 'firebase/database';
 const ChatList = () => {
 	const [plusMode, setPlusMode] = useState(true);
+	const [chats, setChats] = useState([]);
+	const { currentUser } = useUserStore();
+	useEffect(() => {
+		const unsub = onSnapshot(doc(db, 'userchats', currentUser.id), (doc) => {
+			console.log('Current data: ', doc.data());
+			setChats(doc.data());
+		});
+
+		return () => unsub();
+	}, [currentUser.id]);
+	console.log(chats);
 
 	const handlePlusClick = () => {
 		setPlusMode(!plusMode);
