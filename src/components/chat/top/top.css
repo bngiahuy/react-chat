@@ -1,0 +1,51 @@
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    height: 60px;
+    background-color: rgba(17, 25, 40, 0.5);
+    border-bottom: 1px solid #e0e0e0;
+
+    .user {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            
+            .name {
+                color: white;
+                font-size: 18px;
+                font-weight: 500;
+            }
+
+            .status {
+                /* color: #8e8e8e; offline */
+                color: white; /* online */
+                font-size: 14px;
+            }
+        }
+        
+    }
+
+    .icons {
+        display: flex;
+        gap: 10px;
+
+        img {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+    }
+}
