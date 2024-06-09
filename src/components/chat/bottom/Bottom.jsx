@@ -25,7 +25,10 @@ const Bottom = () => {
             <input type="text" placeholder="Message..." className='message' value={text} onChange={e=>setText(e.target.value)}/>
             <div className="emoji">
                 <img src="./emoji.png" alt="emoji-icon" onClick={()=>setOnEmojiClick(!onEmojiClick)}/>
-                <EmojiPicker open={onEmojiClick} onEmojiClick={handleEmojiClick}/>
+                
+                <div className="emojiPicker">
+                    <EmojiPicker open={onEmojiClick} onEmojiClick={handleEmojiClick}/>
+                </div>
             </div>
             
             <button className='sendBtn'>Send</button>
