@@ -1,3 +1,121 @@
 .detail {
     flex: 1;
+    /* justify-content: space-between; */
+    .user {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        border-bottom: 1px solid #e0e0e0;
+        
+        img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .name {
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        .status {
+            color: white;
+            font-size: 18px;
+        }
+        
+    }
+
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+        .option {
+
+            .title {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                font-size: 16px;
+                font-weight: 300;
+                img {
+                    width: 20px;
+                    height: 20px;
+                    cursor: pointer;
+                    background-color: #0d062d8f;
+                    border-radius: 50%;
+                    padding: 5px;
+                }
+            }
+
+            .photos {
+                display: flex;
+                flex-direction: column;
+                gap: 10px; 
+                margin-top: 5px;
+                .photoItems {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .downloadIcon {
+                        width: 30px;
+                        height: 30px;
+                        cursor: pointer;
+                        background-color: #0d062d8f;
+                        border-radius: 50%;
+                        padding: 8px;
+                    }
+
+                    .photoDetails {
+                        display: flex;
+                        align-items: center;
+                        gap: 20px;
+                        img {
+                            width: 40px;
+                            height: 40px;
+                            object-fit: cover;
+                            border-radius: 10px;
+                        }
+
+                        span {
+                            font-size: 14px;
+                        }
+                    }
+
+                    
+                }
+            }
+        }
+
+        .blockBtn {
+            padding: 10px;
+            background-color: #a11919ad;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            border: none;
+            
+            &:hover {
+                background-color: #c21010;
+            }
+        }
+
+        .logout {
+            padding: 10px;
+            background-color: #1946a1ad;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            
+            &:hover {
+                background-color: #2543d8;
+            }
+        }
+    }
 }
