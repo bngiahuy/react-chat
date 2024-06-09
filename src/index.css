@@ -27,3 +27,16 @@ body {
   color: white;
 
 }
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  background-color: whitesmoke;
+  color: black;
+  border-radius: 10px;
+  padding: 20px;
+  font-size: 24px;
+  font-weight: 500;
+}
