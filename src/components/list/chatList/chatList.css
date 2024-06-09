@@ -1,0 +1,97 @@
+.ChatList {
+    flex: 1;
+    overflow: auto;
+
+    .search {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        position: -webkit-sticky; /* Safari */
+        position: sticky;
+        .searchBar {
+            display: flex;
+            flex: 1;
+            background-color: rgba(17, 25, 40, 0.5);
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            padding: 5px;
+            
+            input {
+                background-color: transparent;
+                border: none;
+                outline: none;
+                color: white;
+                padding: 10px;
+                flex: 1;
+                width: 100%;
+            }
+
+            img {
+                width: 20px;
+                height: 20px;
+                cursor: pointer;
+            }
+        }
+
+        .plus {
+            width: 35px;
+            height: 35px;
+            border: none;
+            background-color: rgba(17, 25, 40, 0.5);
+            border-radius: 10px;
+            padding: 10px;
+            cursor: pointer;
+        }
+        
+    }
+
+    .item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        margin: 1%;
+        cursor: pointer;
+        background-color: rgba(17, 25, 40, 0.674);
+        border-radius: 20px;
+
+        img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .info {
+            flex: 1;
+
+            .name {
+                font-size: 18px;
+                font-weight: 500;
+                color: white;
+            }
+
+            .message {
+                font-size: 16px;
+                color: rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        .time {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+    }
+}
+
+::-webkit-scrollbar {
+    background-color: transparent;
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.42);
+    border: 1px solid transparent;
+}
