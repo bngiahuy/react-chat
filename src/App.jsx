@@ -1,14 +1,29 @@
+import { useEffect } from 'react';
 import Chat from './components/chat/Chat';
 import Detail from './components/detail/Detail';
 import List from './components/list/List';
 import Login from './components/login/Login';
 import Notification from './components/notification/Notification';
-const App = () => {
-	const isUser = false;
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './libs/firebase';
+import useUserStore from './libs/zustand';
 
+const App = () => {
+	const { currentUser, isLoading, fetchUserInfo } = useUserStore();
+
+	useEffect(() => {
+		const unSub = onAuthStateChanged(auth, (user) => {
+			fetchUserInfo(user?.uid);
+		});
+
+		return () => unSub();
+	}, [fetchUserInfo]);
+
+	console.log(currentUser);
+	if (isLoading) return <div className="loading">Loading...</div>;
 	return (
 		<div className="container">
-			{isUser ? (
+			{currentUser ? (
 				<>
 					<List />
 					<Chat />
@@ -17,7 +32,6 @@ const App = () => {
 			) : (
 				<Login />
 			)}
-
 			<Notification />
 		</div>
 	);
