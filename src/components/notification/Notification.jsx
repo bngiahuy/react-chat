@@ -5,7 +5,7 @@ const Notification = () => {
 		<div>
 			<ToastContainer
 				position="top-right" // top-left, top-center, top-right, bottom-left, bottom-center, bottom-right
-				autoClose={3000} // 3 seconds
+				autoClose={4000} // 3 seconds
 				hideProgressBar={false}
 				newestOnTop={false} // place new notification on top
 				closeOnClick // close notification when clicked
