@@ -23,18 +23,12 @@ const Login = () => {
 		try {
 			const request = await signInWithEmailAndPassword(auth, email, password);
 
-			// request
-			// 	.then(() => {
-			// 		toast.success('Logged in successfully!');
-			// 	})
-			// 	.catch((error) => {
-			// 		toast.error('Error: ' + error.message);
-			// 		throw new Error(error);
-			// 	});
-
 			toast.success('Logged in successfully!');
 		} catch (error) {
 			console.log('Log Error: ' + error);
+			if (error.code === 'auth/invalid-credential') {
+				error.message = 'Invalid email or password when login!';
+			}
 			toast.error('Error: ' + error.message);
 		} finally {
 			setLoading(false);
@@ -71,7 +65,8 @@ const Login = () => {
 			toast.success('User created successfully! You can log in now.');
 		} catch (error) {
 			console.log('Log Error: ' + error);
-			toast.error('Error: ' + error.message);
+
+			toast.error('Error: ' + error);
 		} finally {
 			setLoading(false);
 		}
