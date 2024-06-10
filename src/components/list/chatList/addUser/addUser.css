@@ -7,7 +7,8 @@
     right: 0;
     bottom: 0;
     margin: auto;
-    width: 50vw;
+    max-width: 50vw;
+    width: fit-content;
     height: 50vh;
     background-color: rgba(13, 3, 69, 0.84);
 
