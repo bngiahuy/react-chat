@@ -1,15 +1,23 @@
+import { signOut } from 'firebase/auth';
 import { auth } from '../../libs/firebase';
+import useUserStore from '../../libs/zustand';
 import './detail.css';
 const Detail = () => {
-	const handleLogout = () => {
-		auth.signOut();
+	const { currentUser } = useUserStore();
+	const handleLogout = async () => {
+		await signOut(auth)
+			.then(() => {
+				console.log('Sign out successfully');
+			})
+			.catch((error) => {
+				console.error('Error signing out: ', error);
+			});
 	};
-
 	return (
 		<div className="detail">
 			<div className="user">
-				<img src="./avatar.png" alt="" />
-				<span className="name">An Bui</span>
+				<img src={currentUser.avatar || './avatar.png'} alt="" />
+				<span className="name">{currentUser.name}</span>
 				<p className="status">Online</p>
 			</div>
 

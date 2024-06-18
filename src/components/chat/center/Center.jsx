@@ -1,102 +1,66 @@
+import { doc, onSnapshot } from 'firebase/firestore';
 import './center.css';
-import { useEffect, useRef } from 'react';
-const Center = () => {
+import { useEffect, useRef, useState } from 'react';
+import { db } from '../../../libs/firebase';
+import ReactTimeAgo from 'react-time-ago';
+import useUserStore from '../../../libs/zustand';
+
+const Center = ({ chatID }) => {
 	const messagesEndRef = useRef(null);
+	const [chat, setChat] = useState();
+	const { currentUser } = useUserStore();
 
 	useEffect(() => {
 		messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-	}, []);
+	}, [chat?.messages]);
+
+	useEffect(() => {
+		const unSub = onSnapshot(doc(db, 'chats', chatID), (res) => {
+			setChat(res.data());
+		});
+
+		return () => {
+			unSub();
+		};
+	}, [chatID]);
+
+	console.log(chat);
 	return (
 		<div className="center">
-			<div className="message">
-				<img src="./avatar.png" alt="" />
-				<div className="text">
-					<p>
-						Lorem Ipsum is simply dummy text of the printing and typesetting
-						industry. Lorem Ipsum has been the industry's standard dummy text
-						ever since the 1500s, when an unknown printer took a galley of type
-						and scrambled it to make a type specimen book. It has survived not
-						only five centuries, but also the leap into electronic typesetting,
-						remaining essentially unchanged. It was popularised in the 1960s
-						with the release of Letraset sheets containing Lorem Ipsum passages,
-						and more recently with desktop publishing software like Aldus
-						PageMaker including versions of Lorem Ipsum.
-					</p>
-					<span className="time">1 min ago</span>
+			{chat?.messages?.map((message) => (
+				<div
+					className={
+						message.senderID === currentUser?.id
+							? 'message message-own'
+							: 'message'
+					}
+					key={message.createdAt}
+				>
+					{/* {message.senderID && <img src={message.senderID.avatar} alt="img" />} */}
+					<div className="text">
+						{message.img && <img src={message.img} alt="img" />}
+						<p>{message.text}</p>
+						{/* <span className="time">
+							{message.createdAt.toDate().toDateString()}
+						</span> */}
+						{
+							<ReactTimeAgo
+								className="time"
+								date={message.createdAt.toDate()}
+								locale="en-US"
+							/>
+						}
+					</div>
 				</div>
-			</div>
+			))}
 
-			<div className="message message-own">
-				<div className="text">
-					<p>
-						Lorem Ipsum is simply dummy text of the printing and typesetting
-						industry. Lorem Ipsum has been the industry's standard dummy text
-						ever since the 1500s, when an unknown printer took a galley of type
-						and scrambled it to make a type specimen book. It has survived not
-						only five centuries, but also the leap into electronic typesetting,
-						remaining essentially unchanged. It was popularised in the 1960s
-						with the release of Letraset sheets containing Lorem Ipsum passages,
-						and more recently with desktop publishing software like Aldus
-						PageMaker including versions of Lorem Ipsum.
-					</p>
-					<span className="time">1 min ago</span>
+			{/* {img.url && (
+				<div className="message message-own">
+					<div className="text">
+						<img src={img.url} alt="img" />
+					</div>
 				</div>
-			</div>
-
-			<div className="message">
-				<img src="./avatar.png" alt="" />
-				<div className="text">
-					<p>
-						Lorem Ipsum is simply dummy text of the printing and typesetting
-						industry. Lorem Ipsum has been the industry's standard dummy text
-						ever since the 1500s, when an unknown printer took a galley of type
-						and scrambled it to make a type specimen book. It has survived not
-						only five centuries, but also the leap into electronic typesetting,
-						remaining essentially unchanged. It was popularised in the 1960s
-						with the release of Letraset sheets containing Lorem Ipsum passages,
-						and more recently with desktop publishing software like Aldus
-						PageMaker including versions of Lorem Ipsum.
-					</p>
-					<span className="time">1 min ago</span>
-				</div>
-			</div>
-
-			<div className="message message-own">
-				<div className="text">
-					<img src="./bg.png" alt="" />
-
-					<p>
-						Lorem Ipsum is simply dummy text of the printing and typesetting
-						industry. Lorem Ipsum has been the industry's standard dummy text
-						ever since the 1500s, when an unknown printer took a galley of type
-						and scrambled it to make a type specimen book. It has survived not
-						only five centuries, but also the leap into electronic typesetting,
-						remaining essentially unchanged. It was popularised in the 1960s
-						with the release of Letraset sheets containing Lorem Ipsum passages,
-						and more recently with desktop publishing software like Aldus
-						PageMaker including versions of Lorem Ipsum.
-					</p>
-					<span className="time">1 min ago</span>
-				</div>
-			</div>
-
-			<div className="message">
-				<img src="./avatar.png" alt="" />
-				<div className="text">
-					<p>
-						Lorem Ipsum is simply dummy text of the printing and typesetting
-						industry. Lorem Ipsum has been the industry's standard dummy text
-						ever since the 1500s, when an unknown printer took a galley of type
-						and scrambled it to make a type specimen book. It has survived not
-						only five centuries, but also the leap into electronic typesetting,
-						remaining essentially unchanged. It was popularised in the 1960s
-						with the release of Letraset sheets containing Lorem Ipsum passages,
-						and more recently with desktop publishing software like Aldus
-						PageMaker including versions of Lorem Ipsum.
-					</p>
-					<span className="time">1 min ago</span>
-				</div>
-			</div>
+			)} */}
 
 			<div ref={messagesEndRef}></div>
 		</div>

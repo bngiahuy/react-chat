@@ -6,6 +6,7 @@ import './chat.css';
 import Top from './top/Top';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../../libs/firebase';
+
 const Chat = () => {
 	const { chatID } = useChatStore();
 

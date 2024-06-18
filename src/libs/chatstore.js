@@ -29,7 +29,8 @@ const useChatStore = create((set) => ({
       }
 
     else {
-        return set({chatID,
+        return set({
+            chatID,
             user,
             isCurrentUserBlocked: false,
             isReceiverBlocked: false,

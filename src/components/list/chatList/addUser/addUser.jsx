@@ -54,19 +54,21 @@ const AddUser = () => {
 				createdAt: serverTimestamp(),
 			});
 
-			await updateDoc(doc(userChatRef, id), {
+			await setDoc(doc(userChatRef, id), {
 				chats: arrayUnion({
 					chatID: newChatRef.id,
 					receiverID: currentUser.id,
+					senderID: id,
 					lastMessage: '',
 					updatedAt: Date.now(),
 				}),
 			});
 
-			await updateDoc(doc(userChatRef, currentUser.id), {
+			await setDoc(doc(userChatRef, currentUser.id), {
 				chats: arrayUnion({
 					chatID: newChatRef.id,
 					receiverID: id,
+					senderID: currentUser.id,
 					lastMessage: '',
 					updatedAt: Date.now(),
 				}),

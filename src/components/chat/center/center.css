@@ -18,11 +18,11 @@
         }
 
         .text {
-            display: flex;
-            flex: 1;
+            
             flex-direction: column;
             gap: 5px;
             p {
+                /* word-wrap: break-word; */
                 border-radius: 10px;
                 padding: 10px;
                 background-color: black;
